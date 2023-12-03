@@ -27,16 +27,38 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<EdgeInsets> _animation;
+
   @override
   void initState() {
     super.initState();
-    // Simulate a delay (e.g., 3 seconds) before navigating to the main screen
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    );
+
+    _animation = Tween<EdgeInsets>(
+      begin: const EdgeInsets.only(top: 0.0),
+      end: const EdgeInsets.only(top: 200.0), // Adjust this value as needed
+    ).animate(_controller);
+
+    // Start the animation after a delay
+    Future.delayed(const Duration(seconds: 1), () {
+      _controller.forward();
+    });
+
+    // Navigate to the main screen after animation completes
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
     });
   }
 
@@ -44,39 +66,33 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Your logo image
-            SvgPicture.asset(
-              'assets/main_logo.svg', // Replace with the path to your logo image
-              width: 150,
-              height: 150,
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Your App Name',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ],
+        child: AnimatedContainer(
+          duration: const Duration(seconds: 2),
+          padding: _animation.value,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Your SVG logo
+              SvgPicture.asset(
+                'assets/main_logo.svg',
+                width: 150,
+                height: 150,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Your App Name',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Screen'),
-      ),
-      body: const Center(
-        child: Text('Your main content goes here!'),
-      ),
-    );
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
