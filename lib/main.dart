@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,14 +74,14 @@ class _SplashScreenState extends State<SplashScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Your SVG logo
-              SvgPicture.asset(
-                'assets/main_logo.svg',
-                width: 150,
-                height: 150,
-              ),
+              SvgPicture.asset('assets/main_logo.svg',
+                  width: 150,
+                  height: 150,
+                  colorFilter: const ColorFilter.mode(
+                      Color.fromARGB(1, 35, 69, 91), BlendMode.srcATop)),
               const SizedBox(height: 20),
               const Text(
-                'Your App Name',
+                'rideTracker',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ],
