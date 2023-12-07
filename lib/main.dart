@@ -63,9 +63,12 @@ class _SplashScreenState extends State<SplashScreen>
     });
   }
 
+//The colours of the scaffold will be stored in a file , and will change
+//Depending on Dark or light mode
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF1E1E1E),
       body: Center(
         child: AnimatedContainer(
           duration: const Duration(seconds: 2),
@@ -81,8 +84,11 @@ class _SplashScreenState extends State<SplashScreen>
                       Color.fromARGB(1, 35, 69, 91), BlendMode.srcATop)),
               const SizedBox(height: 20),
               const Text(
-                'rideTracker',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'RideTracker',
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(35, 69, 91, 1)),
               ),
             ],
           ),
