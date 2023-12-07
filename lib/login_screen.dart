@@ -8,6 +8,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final logger = Logger();
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -15,17 +16,19 @@ class LoginScreen extends StatelessWidget {
           children: [
             const TextField(
               decoration: InputDecoration(
-                labelText: 'Username',
-                border: OutlineInputBorder(),
-              ),
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color.fromRGBO(22, 33, 41, 1)),
             ),
             const SizedBox(height: 20),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color.fromRGBO(22, 33, 41, 1)),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

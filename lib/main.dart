@@ -68,30 +68,26 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
+      backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
       body: Center(
-        child: AnimatedContainer(
-          duration: const Duration(seconds: 2),
-          padding: _animation.value,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Your SVG logo
-              SvgPicture.asset('assets/main_logo.svg',
-                  width: 150,
-                  height: 150,
-                  colorFilter: const ColorFilter.mode(
-                      Color.fromARGB(1, 35, 69, 91), BlendMode.srcATop)),
-              const SizedBox(height: 20),
-              const Text(
-                'RideTracker',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(35, 69, 91, 1)),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Your SVG logo
+            SvgPicture.asset('assets/main_logo.svg',
+                width: 150,
+                height: 150,
+                colorFilter: const ColorFilter.mode(
+                    Color.fromARGB(1, 35, 69, 91), BlendMode.srcATop)),
+            const SizedBox(height: 20),
+            const Text(
+              'RideTracker',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(35, 69, 91, 1)),
+            ),
+          ],
         ),
       ),
     );
