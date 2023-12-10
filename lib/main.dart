@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'login_screen.dart';
+import 'AWS/auth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title',
+      title: 'RideTracker',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -36,6 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    configureAmplify();
 
     _controller = AnimationController(
       vsync: this,

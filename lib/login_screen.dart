@@ -1,3 +1,4 @@
+import 'AWS/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'widgets/login_button.dart';
@@ -51,7 +52,8 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {
                   logger.i('Button pressed');
                   logger.i('Username : ${usernameController.text}');
-                  logger.i('Password : ${usernameController.text}');
+                  logger.i('Password : ${passwordController.text}');
+                  signInUser(usernameController.text, passwordController.text);
                 },
               ),
             ),

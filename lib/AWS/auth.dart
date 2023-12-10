@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 
 //configure amplify upon starting the app
 Logger logger = Logger();
-Future<void> _configureAmplify() async {
+Future<void> configureAmplify() async {
   //Adding the plugins to authenticate login to amplify
   final authplugin = AmplifyAuthCognito();
   Amplify.addPlugin(authplugin);
@@ -14,6 +14,7 @@ Future<void> _configureAmplify() async {
 
   try {
     await Amplify.configure(amplifyconfig);
+    logger.i("Amplify authentication configuration successful");
   } on AmplifyAlreadyConfiguredException {
     logger.i("Amplify already configured");
   }
