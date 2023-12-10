@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      backgroundColor: Color.fromRGBO(4, 5, 6, 1),
+      backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
       body: Stack(
         children: [
           Padding(

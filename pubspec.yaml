@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   flutter_svg: 2.0.9
   logger: ^2.0.2
+  amplify_flutter: ^1.0.0
+  amplify_auth_cognito: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

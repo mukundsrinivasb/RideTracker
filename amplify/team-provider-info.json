@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ridetracker-dev-75238-authRole",
+      "UnauthRoleArn": "arn:aws:iam::419349915075:role/amplify-ridetracker-dev-75238-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::419349915075:role/amplify-ridetracker-dev-75238-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-ridetracker-dev-75238-deployment",
+      "UnauthRoleName": "amplify-ridetracker-dev-75238-unauthRole",
+      "StackName": "amplify-ridetracker-dev-75238",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:419349915075:stack/amplify-ridetracker-dev-75238/0e763980-979e-11ee-980d-0adae6db8121",
+      "AmplifyAppId": "d1eurhqcaxdue3"
+    },
+    "categories": {
+      "auth": {
+        "ridetrackerd1030644": {}
+      }
+    }
+  }
+}
