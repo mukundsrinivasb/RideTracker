@@ -18,7 +18,7 @@ class LoginButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(16.0),
           shape: const CircleBorder(eccentricity: 0),
-          backgroundColor: const Color.fromRGBO(255, 255, 255, 0)),
+          backgroundColor: const Color.fromRGBO(22, 33, 41, 1)),
       child: SvgPicture.asset(svgAsset, width: 24, height: 24),
     );
   }

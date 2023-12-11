@@ -1,7 +1,9 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:ridetracker/amplifyconfiguration.dart';
+import 'package:flutter/material.dart';
+import 'package:ridetracker/AWS/amplifyconfiguration.dart';
 import 'package:logger/logger.dart';
+import 'package:ridetracker/Widgets/reset_password.dart';
 
 //configure amplify upon starting the app
 Logger logger = Logger();
@@ -43,8 +45,15 @@ Future _handleSignIn(SignInResult signIn) async {
     case AuthSignInStep.done:
       logger.i("Sign In successful");
       break;
+    case AuthSignInStep.confirmSignInWithNewPassword:
+      logger.i("Enter a new password to finish signing in");
+      //A text widget to provide a new password
+      ResetPassword();
+      break;
     default:
       logger.i("${signIn.nextStep} is the next step.");
       break;
   }
 }
+
+Future<void> _handleResetPassword(String) async {}
