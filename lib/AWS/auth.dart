@@ -3,6 +3,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:ridetracker/AWS/amplifyconfiguration.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter/material.dart';
 import 'package:ridetracker/Widgets/reset_password.dart';
 
 //configure amplify upon starting the app
@@ -47,8 +48,7 @@ Future _handleSignIn(SignInResult signIn) async {
       break;
     case AuthSignInStep.confirmSignInWithNewPassword:
       logger.i("Enter a new password to finish signing in");
-      //A text widget to provide a new password
-      ResetPassword();
+      //Navigate to the reset password screen
       break;
     default:
       logger.i("${signIn.nextStep} is the next step.");
@@ -56,4 +56,15 @@ Future _handleSignIn(SignInResult signIn) async {
   }
 }
 
-Future<void> _handleResetPassword(String) async {}
+//Handle what happens if the user is logging in for the first time
+Future<void> handleResetPassword(String newPassword) async {
+  try {
+    final result =
+        await Amplify.Auth.confirmSignIn(confirmationValue: newPassword);
+    return _handleSignIn(result);
+  } on AuthException catch (authException) {
+    logger.i("Could not be aithenticated ${authException.message}");
+  }
+}
+
+void resetPasswordScreen() {}
