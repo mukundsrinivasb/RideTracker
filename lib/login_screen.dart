@@ -1,3 +1,5 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
+
 import 'AWS/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -53,7 +55,8 @@ class LoginScreen extends StatelessWidget {
                   logger.i('Button pressed');
                   logger.i('Username : ${usernameController.text}');
                   logger.i('Password : ${passwordController.text}');
-                  signInUser(usernameController.text, passwordController.text);
+                  logger.i(
+                      'The status of the login : ${printSignInResult(usernameController.text, passwordController.text)}');
                 },
               ),
             ),
@@ -61,5 +64,10 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future printSignInResult(String username, String password) async {
+    SignInResult status = await signInUser(username, password);
+    logger.i('The status of the login : ${status.nextStep.signInStep}');
   }
 }

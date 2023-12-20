@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ridetracker/Widgets/reset_password.dart';
 import 'login_screen.dart';
 import 'AWS/auth.dart';
 
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RideTracker',
+      initialRoute: '/',
+      routes: {'/reset_password': (context) => const ResetPasswordScreen()},
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

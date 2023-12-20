@@ -1,3 +1,4 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:ridetracker/AWS/auth.dart';
@@ -18,6 +19,9 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final logger = Logger();
+    //The name of the user is sent to this screen from the login screen
+    final String? userName =
+        ModalRoute.of(context)?.settings.arguments as String?;
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
@@ -49,8 +53,12 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: LoginButton(
                 svgAsset: 'assets/login_arrow.svg',
                 onPressed: () {
-                  logger.i('The new password is : ${passwordController.text}');
-                  handleResetPassword(passwordController.text);
+                  //If the change is successful
+                  logger.i(
+                      'The new password for $userName is : ${passwordController.text}');
+                  //else
+                  logger.i(
+                      'The password for $userName : ${passwordController.text}');
                   Navigator.pop(context);
                 },
               ),
