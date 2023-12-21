@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 import 'AWS/auth.dart';
@@ -51,12 +53,14 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: LoginButton(
                 svgAsset: 'assets/login_arrow.svg',
-                onPressed: () {
+                onPressed: () async {
                   logger.i('Button pressed');
                   logger.i('Username : ${usernameController.text}');
                   logger.i('Password : ${passwordController.text}');
-                  logger.i(
-                      'The status of the login : ${printSignInResult(usernameController.text, passwordController.text)}');
+                  SignInResult status = await signInUser(
+                      usernameController.text, passwordController.text);
+                  onSignIn(status);
+                  mapUserAttributes(status);
                 },
               ),
             ),
@@ -66,8 +70,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Future printSignInResult(String username, String password) async {
+  Future printSignInResult(
+      String username, String password, BuildContext context) async {
     SignInResult status = await signInUser(username, password);
-    logger.i('The status of the login : ${status.nextStep.signInStep}');
+    mapUserAttributes(status);
   }
 }

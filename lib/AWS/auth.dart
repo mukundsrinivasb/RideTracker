@@ -39,14 +39,44 @@ Future<SignInResult> signInUser(String username, String password) async {
 }
 
 //Design what screen to present when the user logs in
-void onSignIn(SignInResult signInStatus, BuildContext context) {
+void onSignIn(SignInResult signInStatus) {
   switch (signInStatus.nextStep.signInStep) {
     case AuthSignInStep.done:
       //Navigate to the main page
       break;
     case AuthSignInStep.confirmSignInWithNewPassword:
       //Navigate to the page where the user is prompted to enter a new password
+
       break;
     default:
   }
+}
+
+/// Maps the user attributes from the [SignInResult] to a [Map<String, String>].
+///
+/// This function takes a [SignInResult] and extracts the user attributes from
+/// the additional information. It then maps the attributes into a [Map<String, String>]
+/// where the attribute names are the keys, and their corresponding values are the values.
+///
+/// The expected format of the user attributes is assumed to be a comma-separated string,
+/// where each attribute is in the form of "key:value".
+///
+/// Example:
+/// ```dart
+/// SignInResult signInResult = ...; // Obtain a SignInResult
+/// Map<String, String> mappedAttributes = mapUserAttributes(signInResult);
+/// ```
+///
+/// The resulting [Map<String, String>] may be used to access specific user attributes
+/// based on their keys.
+Map<String, String> mapUserAttributes(SignInResult signinStatus) {
+  Map<String, String> userAttributesMapped = <String, String>{};
+  MapEntry<String, String> additionalAttributes = signinStatus
+      .nextStep.additionalInfo.entries
+      .firstWhere((element) => element.key == "userAttributes");
+  for (var element in additionalAttributes.value.split(',')) {
+    var splitElements = element.split(':');
+    userAttributesMapped.putIfAbsent(splitElements[0], () => splitElements[1]);
+  }
+  return userAttributesMapped;
 }
