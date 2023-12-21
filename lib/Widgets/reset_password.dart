@@ -1,7 +1,5 @@
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:ridetracker/AWS/auth.dart';
 import 'package:ridetracker/Widgets/login_button.dart';
 
 //Set a new password after the first authentication into aws amplify
@@ -54,12 +52,9 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 svgAsset: 'assets/login_arrow.svg',
                 onPressed: () {
                   //If the change is successful
-                  logger.i(
-                      'The new password for $userName is : ${passwordController.text}');
-                  //else
-                  logger.i(
-                      'The password for $userName : ${passwordController.text}');
-                  Navigator.pop(context);
+                  Map userName =
+                      ModalRoute.of(context)?.settings.arguments as Map;
+                  logger.i('The username sent was $userName');
                 },
               ),
             ),

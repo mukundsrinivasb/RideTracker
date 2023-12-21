@@ -1,7 +1,4 @@
-import 'dart:js';
-
 import 'package:amplify_flutter/amplify_flutter.dart';
-
 import 'AWS/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -12,7 +9,18 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final logger = Logger();
+    Logger logger = Logger();
+    Future navigateToNewPasswordPage(SignInResult signInStatus) async {
+      Map<String, String> attributes = mapUserAttributes(signInStatus);
+      String? userName = attributes['preferred_username'];
+      logger.i('The attributes are $attributes');
+      logger.i('The user name is $userName');
+      if (signInStatus.nextStep.signInStep ==
+          AuthSignInStep.confirmSignInWithNewPassword) {
+        Navigator.pushNamed(context, '/reset_password', arguments: userName);
+      }
+    }
+
     final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
@@ -54,13 +62,9 @@ class LoginScreen extends StatelessWidget {
               child: LoginButton(
                 svgAsset: 'assets/login_arrow.svg',
                 onPressed: () async {
-                  logger.i('Button pressed');
-                  logger.i('Username : ${usernameController.text}');
-                  logger.i('Password : ${passwordController.text}');
                   SignInResult status = await signInUser(
                       usernameController.text, passwordController.text);
-                  onSignIn(status);
-                  mapUserAttributes(status);
+                  navigateToNewPasswordPage(status);
                 },
               ),
             ),
@@ -68,11 +72,5 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future printSignInResult(
-      String username, String password, BuildContext context) async {
-    SignInResult status = await signInUser(username, password);
-    mapUserAttributes(status);
   }
 }

@@ -38,20 +38,6 @@ Future<SignInResult> signInUser(String username, String password) async {
   }
 }
 
-//Design what screen to present when the user logs in
-void onSignIn(SignInResult signInStatus) {
-  switch (signInStatus.nextStep.signInStep) {
-    case AuthSignInStep.done:
-      //Navigate to the main page
-      break;
-    case AuthSignInStep.confirmSignInWithNewPassword:
-      //Navigate to the page where the user is prompted to enter a new password
-
-      break;
-    default:
-  }
-}
-
 /// Maps the user attributes from the [SignInResult] to a [Map<String, String>].
 ///
 /// This function takes a [SignInResult] and extracts the user attributes from
