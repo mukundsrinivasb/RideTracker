@@ -3,6 +3,7 @@ import 'AWS/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'widgets/login_button.dart';
+import 'Styles/color.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Logger logger = Logger();
+    DarkTheme darkTheme = DarkTheme();
     Future navigateToNewPasswordPage(SignInResult signInStatus) async {
       Map<String, String> attributes = mapUserAttributes(signInStatus);
       String? userName = attributes['preferred_username'];
@@ -24,7 +26,7 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(1, 22, 39, 1),
+      backgroundColor: darkTheme.getPrimaryBackground,
       body: Stack(
         children: [
           Padding(
@@ -33,14 +35,12 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextField(
-                  controller: usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    border: OutlineInputBorder(),
-                    filled: true,
-                    fillColor: Color.fromRGBO(22, 33, 41, 1),
-                  ),
-                ),
+                    controller: usernameController,
+                    decoration: const InputDecoration(
+                        labelText: 'Username',
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Color.fromRGBO(101, 175, 255, 1))),
                 const SizedBox(height: 20),
                 TextField(
                   controller: passwordController,
@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                     labelText: 'Password',
                     border: OutlineInputBorder(),
                     filled: true,
-                    fillColor: Color.fromRGBO(22, 33, 41, 1),
+                    fillColor: Color.fromRGBO(101, 175, 255, 1),
                   ),
                 ),
               ],

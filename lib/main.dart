@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DarkTheme darkTheme = DarkTheme();
     return MaterialApp(
       title: 'RideTracker',
       initialRoute: '/',
       routes: {'/reset_password': (context) => const ResetPasswordScreen()},
-      theme: ThemeData(primaryColor: primaryBackground),
+      theme: ThemeData(primaryColor: darkTheme.getPrimaryBackground),
       home: const SplashScreen(), // Show the splash screen initially
     );
   }
@@ -71,8 +72,9 @@ class _SplashScreenState extends State<SplashScreen>
 //Depending on Dark or light mode
   @override
   Widget build(BuildContext context) {
+    DarkTheme darkTheme = DarkTheme();
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
+      backgroundColor: darkTheme.getPrimaryBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
