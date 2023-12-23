@@ -62,7 +62,12 @@ Map<String, String> mapUserAttributes(SignInResult signinStatus) {
       .firstWhere((element) => element.key == "userAttributes");
   for (var element in additionalAttributes.value.split(',')) {
     var splitElements = element.split(':');
-    userAttributesMapped.putIfAbsent(splitElements[0], () => splitElements[1]);
+    final key = splitElements[0].trim();
+    final value = splitElements[1].trim();
+    final addEntry = <String, String>{
+      key.substring(1, key.length - 1): value.substring(1, value.length - 1)
+    };
+    userAttributesMapped.addEntries(addEntry.entries);
   }
   return userAttributesMapped;
 }

@@ -12,11 +12,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Logger logger = Logger();
     DarkTheme darkTheme = DarkTheme();
+    String userName;
     Future navigateToNewPasswordPage(SignInResult signInStatus) async {
       Map<String, String> attributes = mapUserAttributes(signInStatus);
-      String? userName = attributes['preferred_username'];
       logger.i('The attributes are $attributes');
-      logger.i('The user name is $userName');
+      String? userName = attributes["preferred_username"];
+
       if (signInStatus.nextStep.signInStep ==
           AuthSignInStep.confirmSignInWithNewPassword) {
         Navigator.pushNamed(context, '/reset_password', arguments: userName);

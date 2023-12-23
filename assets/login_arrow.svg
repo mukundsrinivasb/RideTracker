@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5" stroke-width="0.5">
 <title>loginArrow</title>
-<polyline points="4 3.36 4.5 2.5 4 1.63 4.5 2.5" stroke="#591B12"/>
-<line x1="2" y1="2.5" x2="4.5" y2="2.5" stroke="#591B12"/>
+<polyline points="4 3.36 4.5 2.5 4 1.63 4.5 2.5" stroke="#744253"/>
+<line x1="2" y1="2.5" x2="4.5" y2="2.5" stroke="#744253"/>
 </svg>
 
 

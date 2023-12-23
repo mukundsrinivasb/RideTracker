@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:ridetracker/Styles/color.dart';
 import 'package:ridetracker/Widgets/login_button.dart';
 
 //Set a new password after the first authentication into aws amplify
@@ -17,12 +18,13 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final logger = Logger();
+    DarkTheme darkTheme = DarkTheme();
     //The name of the user is sent to this screen from the login screen
     final String? userName =
         ModalRoute.of(context)?.settings.arguments as String?;
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(4, 5, 6, 1),
+      backgroundColor: darkTheme.getPrimaryBackground,
       body: Stack(
         children: [
           Padding(
@@ -38,7 +40,7 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     labelText: 'Password',
                     border: OutlineInputBorder(),
                     filled: true,
-                    fillColor: Color.fromRGBO(22, 33, 41, 1),
+                    fillColor: Color.fromRGBO(101, 175, 255, 1),
                   ),
                 ),
               ],
@@ -52,9 +54,9 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 svgAsset: 'assets/login_arrow.svg',
                 onPressed: () {
                   //If the change is successful
-                  Map userName =
-                      ModalRoute.of(context)?.settings.arguments as Map;
-                  logger.i('The username sent was $userName');
+                  // Map userName =
+                  //     ModalRoute.of(context)?.settings.arguments as Map;
+                  logger.i('The new password was set');
                 },
               ),
             ),
