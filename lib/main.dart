@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ridetracker/Widgets/reset_password.dart';
 import 'login_screen.dart';
 import 'AWS/auth.dart';
+import 'Styles/color.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'RideTracker',
       initialRoute: '/',
       routes: {'/reset_password': (context) => const ResetPasswordScreen()},
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primaryColor: primaryBackground),
       home: const SplashScreen(), // Show the splash screen initially
     );
   }
