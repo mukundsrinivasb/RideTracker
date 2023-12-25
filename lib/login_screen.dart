@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: LoginButton(
-                svgAsset: 'assets/login_arrow.svg',
+                svgAsset: 'assets/Vectors/login_arrow.svg',
                 onPressed: () async {
                   SignInResult status = await signInUser(
                       usernameController.text, passwordController.text);

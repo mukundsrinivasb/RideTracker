@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Your SVG logo
-            SvgPicture.asset('assets/main_logo.svg',
+            SvgPicture.asset('assets/Vectors/main_logo.svg',
                 width: 150,
                 height: 150,
                 colorFilter: const ColorFilter.mode(

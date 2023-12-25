@@ -22,36 +22,50 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
     //The name of the user is sent to this screen from the login screen
     final String? userName =
         ModalRoute.of(context)?.settings.arguments as String?;
+    logger.i('Username :  $userName');
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       backgroundColor: darkTheme.getPrimaryBackground,
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                    filled: true,
-                    fillColor: Color.fromRGBO(101, 175, 255, 1),
-                  ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RichText(
+                  text: TextSpan(
+                      text: 'Welcome $userName',
+                      style: const TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 28,
+                          fontWeight: FontWeight.w900,
+                          color: Color.fromRGBO(116, 66, 83, 1)))),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Enter a new password',
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Color.fromRGBO(101, 175, 255, 1),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: LoginButton(
-                svgAsset: 'assets/login_arrow.svg',
+                svgAsset: 'assets/Vectors/login_arrow.svg',
                 onPressed: () {
                   //If the change is successful
                   // Map userName =
