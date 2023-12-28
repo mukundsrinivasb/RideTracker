@@ -27,7 +27,7 @@ import 'package:amplify_core/amplify_core.dart' as amplify_core;
 class Trip extends amplify_core.Model {
   static const classType = const _TripModelType();
   final String id;
-  final String? _tripUnits;
+  final Units? _tripUnits;
   final String? _vehicleMake;
   final String? _vehicleModel;
   final int? _vehicleYear;
@@ -51,7 +51,7 @@ class Trip extends amplify_core.Model {
       );
   }
   
-  String get tripUnits {
+  Units get tripUnits {
     try {
       return _tripUnits!;
     } catch(e) {
@@ -165,7 +165,7 @@ class Trip extends amplify_core.Model {
   
   const Trip._internal({required this.id, required tripUnits, required vehicleMake, required vehicleModel, required vehicleYear, required startReading, required endReading, required fuelQuantity, required date, createdAt, updatedAt}): _tripUnits = tripUnits, _vehicleMake = vehicleMake, _vehicleModel = vehicleModel, _vehicleYear = vehicleYear, _startReading = startReading, _endReading = endReading, _fuelQuantity = fuelQuantity, _date = date, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Trip({String? id, required String tripUnits, required String vehicleMake, required String vehicleModel, required int vehicleYear, required int startReading, required int endReading, required int fuelQuantity, required String date}) {
+  factory Trip({String? id, required Units tripUnits, required String vehicleMake, required String vehicleModel, required int vehicleYear, required int startReading, required int endReading, required int fuelQuantity, required String date}) {
     return Trip._internal(
       id: id == null ? amplify_core.UUID.getUUID() : id,
       tripUnits: tripUnits,
@@ -206,7 +206,7 @@ class Trip extends amplify_core.Model {
     
     buffer.write("Trip {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("tripUnits=" + "$_tripUnits" + ", ");
+    buffer.write("tripUnits=" + (_tripUnits != null ? amplify_core.enumToString(_tripUnits)! : "null") + ", ");
     buffer.write("vehicleMake=" + "$_vehicleMake" + ", ");
     buffer.write("vehicleModel=" + "$_vehicleModel" + ", ");
     buffer.write("vehicleYear=" + (_vehicleYear != null ? _vehicleYear!.toString() : "null") + ", ");
@@ -221,7 +221,7 @@ class Trip extends amplify_core.Model {
     return buffer.toString();
   }
   
-  Trip copyWith({String? tripUnits, String? vehicleMake, String? vehicleModel, int? vehicleYear, int? startReading, int? endReading, int? fuelQuantity, String? date}) {
+  Trip copyWith({Units? tripUnits, String? vehicleMake, String? vehicleModel, int? vehicleYear, int? startReading, int? endReading, int? fuelQuantity, String? date}) {
     return Trip._internal(
       id: id,
       tripUnits: tripUnits ?? this.tripUnits,
@@ -235,7 +235,7 @@ class Trip extends amplify_core.Model {
   }
   
   Trip copyWithModelFieldValues({
-    ModelFieldValue<String>? tripUnits,
+    ModelFieldValue<Units>? tripUnits,
     ModelFieldValue<String>? vehicleMake,
     ModelFieldValue<String>? vehicleModel,
     ModelFieldValue<int>? vehicleYear,
@@ -259,7 +259,7 @@ class Trip extends amplify_core.Model {
   
   Trip.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _tripUnits = json['tripUnits'],
+      _tripUnits = amplify_core.enumFromString<units>(json['tripUnits'], units.values),
       _vehicleMake = json['vehicleMake'],
       _vehicleModel = json['vehicleModel'],
       _vehicleYear = (json['vehicleYear'] as num?)?.toInt(),
@@ -271,7 +271,7 @@ class Trip extends amplify_core.Model {
       _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'tripUnits': _tripUnits, 'vehicleMake': _vehicleMake, 'vehicleModel': _vehicleModel, 'vehicleYear': _vehicleYear, 'startReading': _startReading, 'endReading': _endReading, 'fuelQuantity': _fuelQuantity, 'date': _date, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'tripUnits': amplify_core.enumToString(_tripUnits), 'vehicleMake': _vehicleMake, 'vehicleModel': _vehicleModel, 'vehicleYear': _vehicleYear, 'startReading': _startReading, 'endReading': _endReading, 'fuelQuantity': _fuelQuantity, 'date': _date, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
@@ -307,7 +307,7 @@ class Trip extends amplify_core.Model {
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Trip.TRIPUNITS,
       isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.enumeration)
     ));
     
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
