@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:ridetracker/AWS/auth.dart';
 import 'package:ridetracker/Styles/color.dart';
 import 'package:ridetracker/Widgets/login_button.dart';
 
@@ -66,11 +67,12 @@ class ResetPasswordScreenState extends State<ResetPasswordScreen> {
               padding: const EdgeInsets.all(16.0),
               child: LoginButton(
                 svgAsset: 'assets/Vectors/login_arrow.svg',
-                onPressed: () {
-                  //If the change is successful
-                  // Map userName =
-                  //     ModalRoute.of(context)?.settings.arguments as Map;
-                  logger.i('The new password was set');
+                onPressed: () async {
+                  final result =
+                      await handleNewPassword(passwordController.text);
+                  if (handleSignIn(result) == 1) {
+                    logger.i('The sign in of $userName was successful');
+                  }
                 },
               ),
             ),

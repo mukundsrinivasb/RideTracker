@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ridetracker/Widgets/reset_password.dart';
+import 'package:ridetracker/reset_password.dart';
+import 'package:ridetracker/primary_interface.dart';
 import 'login_screen.dart';
 import 'AWS/auth.dart';
 import 'Styles/color.dart';
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RideTracker',
       initialRoute: '/',
-      routes: {'/reset_password': (context) => const ResetPasswordScreen()},
+      routes: {
+        '/reset_password': (context) => const ResetPasswordScreen(),
+        '/primary_interface': (context) => const PrimaryInterface(),
+      },
       theme: ThemeData(primaryColor: darkTheme.getPrimaryBackground),
       home: const SplashScreen(), // Show the splash screen initially
     );
@@ -29,13 +33,14 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<EdgeInsets> _animation;
+  late bool isSignedIn;
 
   @override
   void initState() {
@@ -57,13 +62,29 @@ class _SplashScreenState extends State<SplashScreen>
       _controller.forward();
     });
 
-    // Navigate to the main screen after animation completes
+    //Check if the user is signed in
+    void setSignedIn() async {
+      Future<bool> getSignedIn() async {
+        return await isUserSignedIn();
+      }
+
+      isSignedIn = await getSignedIn();
+    }
+
+    // Navigate to the login screen if the user is not logged in.
+    //Navigate to the Login screen if the user is logged in.
     _controller.addStatusListener((status) {
+      setSignedIn();
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-        );
+        if (isSignedIn) {
+          logger.i("The user should be directed to the home page");
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+          );
+          logger.i("The user was not signed in ");
+        }
       }
     });
   }

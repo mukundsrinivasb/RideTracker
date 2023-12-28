@@ -1,6 +1,6 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:flutter/material.dart';
+import 'package:amplify_api/amplify_api.dart';
 import 'package:ridetracker/AWS/amplifyconfiguration.dart';
 import 'package:logger/logger.dart';
 
@@ -194,4 +194,10 @@ int handleSignIn(SignInResult signIn) {
     default:
       return 0;
   }
+}
+
+Future<SignInResult> handleNewPassword(String newPassword) async {
+  final SignInResult singInResult =
+      await Amplify.Auth.confirmSignIn(confirmationValue: newPassword);
+  return singInResult;
 }

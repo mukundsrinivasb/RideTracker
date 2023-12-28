@@ -12,9 +12,25 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Logger logger = Logger();
     DarkTheme darkTheme = DarkTheme();
+
+    ///
+    /// Navigates to a new password page based on the sign-in status.
+    ///
+    /// This asynchronous method takes a [SignInResult] object as its parameter, extracts
+    /// user attributes using the `mapUserAttributes` function, and retrieves the user's
+    /// `preferred_username`. It then determines the sign-in status using the `handleSignIn`
+    /// function. If the sign-in status is 2 (indicating the need to confirm sign-in with a
+    /// new password), it navigates to the '/reset_password' page with the user's username
+    /// as an argument.
+    ///
+    /// Parameters:
+    /// - [signInStatus]: A [SignInResult] object representing the result of a sign-in attempt.
+    ///
+    /// Returns:
+    /// - A [Future] representing the navigation to the new password page, if applicable.
+    ///
     Future navigateToNewPasswordPage(SignInResult signInStatus) async {
       Map<String, String> attributes = mapUserAttributes(signInStatus);
-      logger.i('The attributes are $attributes');
       String? userName = attributes["preferred_username"];
       int signInStatusValue = handleSignIn(signInStatus);
 
