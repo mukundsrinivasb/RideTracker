@@ -36,6 +36,8 @@ class LoginScreen extends StatelessWidget {
 
       if (signInStatusValue == 2) {
         Navigator.pushNamed(context, '/reset_password', arguments: userName);
+      } else if (signInStatusValue == 1) {
+        Navigator.pushNamed(context, '/primary_interface', arguments: userName);
       }
     }
 
