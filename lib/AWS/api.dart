@@ -19,7 +19,7 @@ Future configureAmplifyAPI() async {
 
 //A factory method to create a trip Object
 Future createTrip(
-    Units tripUnits,
+    units tripUnits,
     String vehicleMake,
     String vehicleModel,
     int vehicleYear,
